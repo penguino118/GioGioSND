@@ -83,6 +83,10 @@ namespace GioGioSND
             SNDTabControl.Enabled = false;
             StripFileSave.Enabled = false;
             StripFileSaveAs.Enabled = false;
+            
+            VAGListView.Items.Clear();
+            SequenceTreeView.Nodes.Clear();
+            
             file_list = GetFilesFromSND(input_file);
 
             if (file_list.Count <= 0 | file_list[0].Length <= 0 | file_list[1].Length <= 0 | file_list[2].Length <= 0)

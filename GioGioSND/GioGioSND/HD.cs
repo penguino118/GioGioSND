@@ -105,19 +105,31 @@ namespace GioGioSND.GioGioSND
                             break;
                         case "IECSlpmS":
                             { int skip_offset = offset + BitConverter.ToInt32(hd_data, offset + 0x8);
-                            offset += 0x10 + ((sample_properties.Count + 1) * 4);
-                            foreach (SampleProperties property in sample_properties)
-                            {
-                                byte[] index_bytes = BitConverter.GetBytes(property.sample_index);
-                                for (int ii = 0; ii < 2; ii++) // write new index
+                            int sample_count = (BitConverter.ToInt32(hd_data, offset + 0xC))+1;
+                            int chunk_origin = offset;
+                            int list_index = 0;
+                            offset += 0x10;
+                            for (int ii = 0; ii < sample_count; ii++)
                                 {
-                                    hd_data[offset + ii] = index_bytes[ii];
+                                    int sample_offset = BitConverter.ToInt32(hd_data, offset);
+                                    if (sample_offset != -1)
+                                    {
+                                        SampleProperties property = sample_properties.ElementAt(list_index);
+                                        sample_offset += chunk_origin;
+
+                                        byte[] index_bytes = BitConverter.GetBytes(property.sample_index);
+                                        for (int iii = 0; iii < 2; iii++) // write new index
+                                        {
+                                            hd_data[sample_offset + iii] = index_bytes[iii];
+                                        }
+                                        hd_data[sample_offset + 0x0E] = property.sample_group;
+                                        hd_data[sample_offset + 0x0F] = property.sample_priority;
+                                        hd_data[sample_offset + 0x10] = property.sample_volume;
+
+                                        list_index++;
+                                    }
+                                    offset += 0x4;
                                 }
-                                hd_data[offset + 0x0E] = property.sample_group;
-                                hd_data[offset + 0x0F] = property.sample_priority;
-                                hd_data[offset + 0x10] = property.sample_volume;
-                                offset += 0x2A;
-                            }
                             offset = skip_offset; }
                             break;
                         default:
@@ -239,24 +251,34 @@ namespace GioGioSND.GioGioSND
                     }
                     else
                     {
+                        long chunk_origin = reader.BaseStream.Position - 0x8;
                         reader.BaseStream.Position += 0x4;
                         int sample_count = reader.ReadInt32() + 1;
-                        reader.BaseStream.Position += sample_count * 0x4;
                         for (int i = 0; i < sample_count; i++)
                         {
-                            short vag_index = reader.ReadInt16();
-                            reader.BaseStream.Position += 0xC;
-                            byte vag_group = reader.ReadByte();
-                            byte vag_priority = reader.ReadByte();
-                            byte vag_volume = reader.ReadByte();
-                            reader.BaseStream.Position += 0x19;
-                            vag_list.Add(new SampleProperties
+                            int sample_offset = reader.ReadInt32();
+
+                            if (sample_offset != -1)
                             {
-                                sample_index = vag_index,
-                                sample_group = vag_group,
-                                sample_priority = vag_priority,
-                                sample_volume = vag_volume
-                            });
+                                long original_position = reader.BaseStream.Position;
+
+                                reader.BaseStream.Position = chunk_origin+sample_offset;
+                                short vag_index = reader.ReadInt16();
+                                reader.BaseStream.Position += 0xC;
+                                byte vag_group = reader.ReadByte();
+                                byte vag_priority = reader.ReadByte();
+                                byte vag_volume = reader.ReadByte();
+                                reader.BaseStream.Position += 0x19;
+                                vag_list.Add(new SampleProperties
+                                {
+                                    sample_index = vag_index,
+                                    sample_group = vag_group,
+                                    sample_priority = vag_priority,
+                                    sample_volume = vag_volume
+                                });
+
+                                reader.BaseStream.Position = original_position;
+                            }
                         }
                     }
                 }

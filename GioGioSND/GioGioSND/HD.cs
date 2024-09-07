@@ -232,6 +232,7 @@ namespace GioGioSND.GioGioSND
                 while (reader.BaseStream.Position <= hd_data.Length-8) // todo: DANGEROUS!!
                 {
                     long test_magic = reader.ReadInt64();
+
                     if (test_magic != 0x536D706C53434549)
                     {
                         reader.BaseStream.Position += 0x8;
@@ -239,9 +240,9 @@ namespace GioGioSND.GioGioSND
                     else
                     {
                         reader.BaseStream.Position += 0x4;
-                        int sample_count = reader.ReadInt32();
-                        reader.BaseStream.Position += (1+sample_count)*0x4;
-                        for (int i=0; i<sample_count; i++)
+                        int sample_count = reader.ReadInt32() + 1;
+                        reader.BaseStream.Position += sample_count * 0x4;
+                        for (int i = 0; i < sample_count; i++)
                         {
                             short vag_index = reader.ReadInt16();
                             reader.BaseStream.Position += 0xC;

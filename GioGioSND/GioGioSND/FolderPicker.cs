@@ -95,6 +95,7 @@ public class FolderPicker
         if (CheckHr(dialog.GetResults(out var items), throwOnError) != 0)
             return null;
 
+        _resultPaths.Clear();
         items.GetCount(out var count);
         for (var i = 0; i < count; i++)
         {

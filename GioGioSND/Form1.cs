@@ -90,10 +90,19 @@ namespace GioGioSND
                 MessageBox.Show("The file is empty or contains no samples.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            vag_list = GetVagList(file_list[0], file_list[1]);
-            sample_list = GetSampleList(file_list[0]);
-            sequence_list = GetSequenceList(file_list[2]);
+            
+            try
+            {
+                vag_list = GetVagList(file_list[0], file_list[1]);
+                sample_list = GetSampleList(file_list[0]);
+                sequence_list = GetSequenceList(file_list[2]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving data from SDN.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
 
             if (!is_afs) StripFileSave.Enabled = true;
             StripFileSaveAs.Enabled = true;
@@ -183,8 +192,6 @@ namespace GioGioSND
                     MessageBox.Show("Input is neither wav or adx!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-
                 OpenWAVADX(File.ReadAllBytes(input_file), input_extension);
             }
         }
@@ -206,20 +213,28 @@ namespace GioGioSND
 
         private void OpenWAVADX(byte[] input_file, string input_extension)
         {
-            ADX_current_input = input_file;
-            ADXTab_current_format = input_extension;
-            bool is_wav = String.Equals(input_extension, ".wav", StringComparison.OrdinalIgnoreCase);
-
-            if (is_wav)
+            try
             {
-                ADXLoopCheckbox.Enabled = true;
-            }
+                ADX_current_input = input_file;
+                ADXTab_current_format = input_extension;
+                bool is_wav = String.Equals(input_extension, ".wav", StringComparison.OrdinalIgnoreCase);
 
-            long sample_count = GetSampleCount();
-            SetLoopLimits(sample_count);
-            string output_extension = GetOutputExtension();
-            ADXSaveButton.Text = "Save Output Audio (" + output_extension.ToUpper() + ")";
-            ADXSaveButton.Enabled = true;
+                if (is_wav)
+                {
+                    ADXLoopCheckbox.Enabled = true;
+                }
+
+                long sample_count = GetSampleCount();
+                SetLoopLimits(sample_count);
+                string output_extension = GetOutputExtension();
+                ADXSaveButton.Text = "Save Output Audio (" + output_extension.ToUpper() + ")";
+                ADXSaveButton.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading " + input_extension + " from file or AFS.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         public void LoadFileFromAFS(int file_index)

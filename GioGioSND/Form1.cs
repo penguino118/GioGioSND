@@ -83,10 +83,11 @@ namespace GioGioSND
             SNDTabControl.Enabled = false;
             StripFileSave.Enabled = false;
             StripFileSaveAs.Enabled = false;
-            
+            StripExtract.Enabled = false;
+
             VAGListView.Items.Clear();
             SequenceTreeView.Nodes.Clear();
-            
+
             file_list = GetFilesFromSND(input_file);
 
             if (file_list.Count <= 0 | file_list[0].Length <= 0 | file_list[1].Length <= 0 | file_list[2].Length <= 0)
@@ -94,7 +95,7 @@ namespace GioGioSND
                 MessageBox.Show("The file is empty or contains no samples.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             try
             {
                 vag_list = GetVagList(file_list[0], file_list[1]);
@@ -106,11 +107,12 @@ namespace GioGioSND
                 MessageBox.Show("Error retrieving data from SDN.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
 
             if (!is_afs) StripFileSave.Enabled = true;
             StripFileSaveAs.Enabled = true;
             SNDTabControl.Enabled = true;
+            StripExtract.Enabled = true;
             SetVAGListView();
             SetSampleDataGrid();
             SetSequenceTreeView();
@@ -832,6 +834,117 @@ namespace GioGioSND
             }
         }
 
-        
+        private void StripExtractHD_Click(object sender, EventArgs e)
+        {
+            
+            if (file_list == null)
+            {
+                MessageBox.Show("The file list is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string initial_output_name = SND.GetFileName(input_file, 00, "hd");
+
+            sfd.Title = "Save HD";
+            sfd.Filter = "HD Files|.hd";
+            sfd.FileName = initial_output_name;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string exported_file = sfd.FileName;
+
+                if (exported_file is null)
+                {
+                    MessageBox.Show("The ouput path for the file is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                File.WriteAllBytes(exported_file, file_list[0]);
+            }
+        }
+
+        private void StripExtractBD_Click(object sender, EventArgs e)
+        {
+            if (file_list == null)
+            {
+                MessageBox.Show("The file list is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string initial_output_name = SND.GetFileName(input_file, 01, "bd");
+
+            sfd.Title = "Save BD";
+            sfd.Filter = "BD Files|.bd";
+            sfd.FileName = initial_output_name;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string exported_file = sfd.FileName;
+
+                if (exported_file is null)
+                {
+                    MessageBox.Show("The ouput path for the file is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                File.WriteAllBytes(exported_file, file_list[1]);
+            }
+        }
+
+        private void StripExtractSequence_Click(object sender, EventArgs e)
+        {
+            if (file_list == null)
+            {
+                MessageBox.Show("The file list is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string initial_output_name = SND.GetFileName(input_file, 02, "bin");
+
+            sfd.Title = "Save Sequence Data";
+            sfd.Filter = "All Files|*.*";
+            sfd.FileName = initial_output_name;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string exported_file = sfd.FileName;
+
+                if (exported_file is null)
+                {
+                    MessageBox.Show("The ouput path for the file is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                File.WriteAllBytes(exported_file, file_list[2]);
+            }
+        }
+
+        private void StripExtractFile4Unknown_Click(object sender, EventArgs e)
+        {
+            if (file_list == null)
+            {
+                MessageBox.Show("The file list is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string initial_output_name = SND.GetFileName(input_file, 03, "bin");
+
+            sfd.Title = "Save Unknown File";
+            sfd.Filter = "All Files|*.*";
+            sfd.FileName = initial_output_name;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string exported_file = sfd.FileName;
+
+                if (exported_file is null)
+                {
+                    MessageBox.Show("The ouput path for the file is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                File.WriteAllBytes(exported_file, file_list[3]);
+            }
+        }
     }
 }

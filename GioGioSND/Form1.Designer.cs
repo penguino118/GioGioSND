@@ -34,8 +34,19 @@
             menuStrip1 = new MenuStrip();
             StripFile = new ToolStripMenuItem();
             StripFileOpen = new ToolStripMenuItem();
+            StripFileAFSOpen = new ToolStripMenuItem();
+            toolStripSeparator5 = new ToolStripSeparator();
             StripFileSave = new ToolStripMenuItem();
             StripFileSaveAs = new ToolStripMenuItem();
+            StripExtract = new ToolStripMenuItem();
+            StripExtractInner = new ToolStripMenuItem();
+            StripExtractHD = new ToolStripMenuItem();
+            StripExtractBD = new ToolStripMenuItem();
+            StripExtractSequence = new ToolStripMenuItem();
+            StripExtractFile4Unknown = new ToolStripMenuItem();
+            StripExtractSound = new ToolStripMenuItem();
+            asWAVToolStripMenuItem = new ToolStripMenuItem();
+            batchExportVAGToolStripMenuItem = new ToolStripMenuItem();
             VAGListView = new ListView();
             IndexColumn = new ColumnHeader();
             LenghtColumn = new ColumnHeader();
@@ -98,8 +109,6 @@
             ADXContextMenu = new ContextMenuStrip(components);
             ADXContextOpenFile = new ToolStripMenuItem();
             ADXContextOpenAFS = new ToolStripMenuItem();
-            StripFileAFSOpen = new ToolStripMenuItem();
-            toolStripSeparator5 = new ToolStripSeparator();
             menuStrip1.SuspendLayout();
             VAGContextMenu.SuspendLayout();
             SNDTabControl.SuspendLayout();
@@ -147,7 +156,7 @@
             // menuStrip1
             // 
             menuStrip1.Dock = DockStyle.None;
-            menuStrip1.Items.AddRange(new ToolStripItem[] { StripFile });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { StripFile, StripExtract });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(370, 24);
@@ -164,15 +173,27 @@
             // StripFileOpen
             // 
             StripFileOpen.Name = "StripFileOpen";
-            StripFileOpen.Size = new Size(180, 22);
+            StripFileOpen.Size = new Size(157, 22);
             StripFileOpen.Text = "Open";
             StripFileOpen.Click += StripFileOpen_Click;
+            // 
+            // StripFileAFSOpen
+            // 
+            StripFileAFSOpen.Name = "StripFileAFSOpen";
+            StripFileAFSOpen.Size = new Size(157, 22);
+            StripFileAFSOpen.Text = "Open From AFS";
+            StripFileAFSOpen.Click += StripFileAFSOpen_Click;
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(154, 6);
             // 
             // StripFileSave
             // 
             StripFileSave.Enabled = false;
             StripFileSave.Name = "StripFileSave";
-            StripFileSave.Size = new Size(180, 22);
+            StripFileSave.Size = new Size(157, 22);
             StripFileSave.Text = "Save";
             StripFileSave.Click += StripFileSave_Click;
             // 
@@ -180,9 +201,73 @@
             // 
             StripFileSaveAs.Enabled = false;
             StripFileSaveAs.Name = "StripFileSaveAs";
-            StripFileSaveAs.Size = new Size(180, 22);
+            StripFileSaveAs.Size = new Size(157, 22);
             StripFileSaveAs.Text = "Save as";
             StripFileSaveAs.Click += StripFileSaveAs_Click;
+            // 
+            // StripExtract
+            // 
+            StripExtract.DropDownItems.AddRange(new ToolStripItem[] { StripExtractInner, StripExtractSound });
+            StripExtract.Enabled = false;
+            StripExtract.Name = "StripExtract";
+            StripExtract.Size = new Size(55, 20);
+            StripExtract.Text = "Extract";
+            // 
+            // StripExtractInner
+            // 
+            StripExtractInner.DropDownItems.AddRange(new ToolStripItem[] { StripExtractHD, StripExtractBD, StripExtractSequence, StripExtractFile4Unknown });
+            StripExtractInner.Name = "StripExtractInner";
+            StripExtractInner.Size = new Size(180, 22);
+            StripExtractInner.Text = "Inner Files";
+            // 
+            // StripExtractHD
+            // 
+            StripExtractHD.Name = "StripExtractHD";
+            StripExtractHD.Size = new Size(180, 22);
+            StripExtractHD.Text = "Audio Header (,hd)";
+            StripExtractHD.Click += StripExtractHD_Click;
+            // 
+            // StripExtractBD
+            // 
+            StripExtractBD.Name = "StripExtractBD";
+            StripExtractBD.Size = new Size(180, 22);
+            StripExtractBD.Text = "Audio Body (.bd)";
+            StripExtractBD.Click += StripExtractBD_Click;
+            // 
+            // StripExtractSequence
+            // 
+            StripExtractSequence.Name = "StripExtractSequence";
+            StripExtractSequence.Size = new Size(180, 22);
+            StripExtractSequence.Text = "Sequence Data";
+            StripExtractSequence.Click += StripExtractSequence_Click;
+            // 
+            // StripExtractFile4Unknown
+            // 
+            StripExtractFile4Unknown.Name = "StripExtractFile4Unknown";
+            StripExtractFile4Unknown.Size = new Size(180, 22);
+            StripExtractFile4Unknown.Text = "Unknown";
+            StripExtractFile4Unknown.Click += StripExtractFile4Unknown_Click;
+            // 
+            // StripExtractSound
+            // 
+            StripExtractSound.DropDownItems.AddRange(new ToolStripItem[] { asWAVToolStripMenuItem, batchExportVAGToolStripMenuItem });
+            StripExtractSound.Name = "StripExtractSound";
+            StripExtractSound.Size = new Size(180, 22);
+            StripExtractSound.Text = "Sound Clips";
+            // 
+            // asWAVToolStripMenuItem
+            // 
+            asWAVToolStripMenuItem.Name = "asWAVToolStripMenuItem";
+            asWAVToolStripMenuItem.Size = new Size(180, 22);
+            asWAVToolStripMenuItem.Text = "Batch Export (WAV)";
+            asWAVToolStripMenuItem.Click += ContextVAGBatchExportWAV_Click;
+            // 
+            // batchExportVAGToolStripMenuItem
+            // 
+            batchExportVAGToolStripMenuItem.Name = "batchExportVAGToolStripMenuItem";
+            batchExportVAGToolStripMenuItem.Size = new Size(180, 22);
+            batchExportVAGToolStripMenuItem.Text = "Batch Export (VAG)";
+            batchExportVAGToolStripMenuItem.Click += VAGContextBatchExportVAG_Click;
             // 
             // VAGListView
             // 
@@ -859,18 +944,6 @@
             ADXContextOpenAFS.Text = "From AFS";
             ADXContextOpenAFS.Click += ADXContextOpenAFS_Click;
             // 
-            // StripFileAFSOpen
-            // 
-            StripFileAFSOpen.Name = "StripFileAFSOpen";
-            StripFileAFSOpen.Size = new Size(180, 22);
-            StripFileAFSOpen.Text = "Open From AFS";
-            StripFileAFSOpen.Click += StripFileAFSOpen_Click;
-            // 
-            // toolStripSeparator5
-            // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(177, 6);
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1007,5 +1080,14 @@
         private ToolStripMenuItem ADXContextOpenAFS;
         private ToolStripMenuItem StripFileAFSOpen;
         private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem StripExtract;
+        private ToolStripMenuItem StripExtractInner;
+        private ToolStripMenuItem StripExtractHD;
+        private ToolStripMenuItem StripExtractBD;
+        private ToolStripMenuItem StripExtractSequence;
+        private ToolStripMenuItem StripExtractFile4Unknown;
+        private ToolStripMenuItem StripExtractSound;
+        private ToolStripMenuItem asWAVToolStripMenuItem;
+        private ToolStripMenuItem batchExportVAGToolStripMenuItem;
     }
 }

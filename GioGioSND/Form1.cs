@@ -676,7 +676,7 @@ namespace GioGioSND
         private void SampleDataGrid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             var grid = sender as DataGridView;
-            var rowIdx = (e.RowIndex).ToString();
+            var rowIdx = (sample_list[e.RowIndex].entry_index).ToString();
 
             var centerFormat = new StringFormat()
             {

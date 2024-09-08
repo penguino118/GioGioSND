@@ -6,7 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>moody.ico</ApplicationIcon>
+    <AssemblyName>MoodyBlues</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="moody.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NAudio" Version="2.2.1" />

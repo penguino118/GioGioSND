@@ -13,6 +13,7 @@ namespace GioGioSND.GioGioSND
     {
         public class SampleProperties
         {
+            public int entry_index;
             public short sample_index;
             public byte sample_group;
             public byte sample_priority;
@@ -254,6 +255,7 @@ namespace GioGioSND.GioGioSND
                         long chunk_origin = reader.BaseStream.Position - 0x8;
                         reader.BaseStream.Position += 0x4;
                         int sample_count = reader.ReadInt32() + 1;
+                        int sample_entry_index = 0;
                         for (int i = 0; i < sample_count; i++)
                         {
                             int sample_offset = reader.ReadInt32();
@@ -271,6 +273,8 @@ namespace GioGioSND.GioGioSND
                                 reader.BaseStream.Position += 0x19;
                                 vag_list.Add(new SampleProperties
                                 {
+                                    
+                                    entry_index = sample_entry_index,
                                     sample_index = vag_index,
                                     sample_group = vag_group,
                                     sample_priority = vag_priority,
@@ -279,6 +283,8 @@ namespace GioGioSND.GioGioSND
 
                                 reader.BaseStream.Position = original_position;
                             }
+                            
+                            sample_entry_index++;
                         }
                     }
                 }

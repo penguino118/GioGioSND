@@ -97,7 +97,7 @@ namespace GioGioSND.GioGioSND
                 get { return length_multiplier; }
                 set { length_multiplier = value; }
             }
-            [DisplayName("Transition Sample")]
+            [DisplayName("Main Sample")]
             public SampleEntry display_end_sample
             {
                 get { return end_sample; }

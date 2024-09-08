@@ -8,6 +8,7 @@ using VGAudio.Containers.Wave;
 using VGAudio.Formats.Pcm16;
 using static GioGioSND.GioGioSND.HD;
 using static GioGioSND.GioGioSND.SND;
+using System.IO;
 namespace GioGioSND
 {
     public partial class Form1 : Form
@@ -230,7 +231,7 @@ namespace GioGioSND
                     ADXLoopCheckbox.Enabled = true;
                 }
 
-                long sample_count = GetSampleCount();
+                long sample_count = GetADXInputSampleCount();
                 SetLoopLimits(sample_count);
                 string output_extension = GetOutputExtension();
                 ADXSaveButton.Text = "Save Output Audio (" + output_extension.ToUpper() + ")";
@@ -294,7 +295,7 @@ namespace GioGioSND
             }
         }
 
-        private long GetSampleCount()
+        private long GetADXInputSampleCount()
         {
             long sample_count = 0;
             using (Stream stream = new MemoryStream(ADX_current_input))
@@ -616,34 +617,58 @@ namespace GioGioSND
             vag_list.RemoveAt(selected_clip_index);
             vag_list.Insert(selected_clip_index, imported_vag);
 
-            UpdateVAGLengthOnSequences(selected_clip_index);
+            UpdateVAGLengthOnSequences(selected_clip_index, wav_path);
             SetVAGListView();
         }
 
-        private void UpdateVAGLengthOnSequences(int vag_index)
+        private void UpdateVAGLengthOnSequences(int vag_index, string input_wav)
         {
-            List<int> vag_samplelist_entries = new List<int>();
-            foreach (SampleProperties properties in sample_list) // get all samples that use the vag
+            byte new_sequence_length, length_multiplier;
+            GetSequenceLengthFromWAV(input_wav, out new_sequence_length, out length_multiplier);
+
+            for (int i = 0; i < sequence_list.Count; i++)
             {
-                if (properties.sample_index == vag_index)
+                SoundSequence sequence = sequence_list[i];
+                // oh well
+                if ((sequence.sample_1.sample_index ^ 0x80) == vag_index |
+                    (sequence.sample_2.sample_index ^ 0x80) == vag_index |
+                    (sequence.sample_3.sample_index ^ 0x80) == vag_index |
+                    (sequence.sample_4.sample_index ^ 0x80) == vag_index |
+                    (sequence.end_sample.sample_index ^ 0x80) == vag_index)
                 {
-                    vag_samplelist_entries.Add(properties.entry_index);
+                    sequence_list[i].display_playback_length = new_sequence_length;
+                    sequence_list[i].display_length_multiplier = length_multiplier;
                 }
             }
+        }
 
-            foreach (SoundSequence sequence in sequence_list)
+        private void GetSequenceLengthFromWAV(string input_wav, out byte base_length, out byte length_multiplier)
+        {
+            base_length = 1;
+            length_multiplier = 1;
+
+            long base_max_milliseconds = 1074; // playback_length = 127
+            int base_split_milliseconds = 32;
+            int additive_milliseconds = 500;
+
+            var audioFile = new WaveFileReader(input_wav);
+            double input_milliseconds = audioFile.TotalTime.TotalMilliseconds;
+
+            if (input_milliseconds < base_max_milliseconds)
             {
-                foreach (int sample_index in vag_samplelist_entries)
+                double test_length = base_split_milliseconds;
+                while (test_length < input_milliseconds)
                 {
-                    // oh well
-                    if (sequence.sample_1.sample_index == sample_index |
-                        sequence.sample_2.sample_index == sample_index |
-                        sequence.sample_3.sample_index == sample_index |
-                        sequence.sample_4.sample_index == sample_index |
-                        sequence.end_sample.sample_index == sample_index)
-                    {
-
-                    }
+                    test_length += base_split_milliseconds;
+                    base_length++;
+                }
+            }
+            else
+            {
+                base_length = 127;
+                while (base_max_milliseconds + (additive_milliseconds * length_multiplier) < input_milliseconds)
+                {
+                    length_multiplier++;
                 }
             }
         }
@@ -757,7 +782,7 @@ namespace GioGioSND
                         if (test_filename == Path.GetFileName(file_import))
                         {
                             VAGImportFromWav(i, vag, file_import);
-                            UpdateVAGLengthOnSequences(i);
+                            UpdateVAGLengthOnSequences(i, file_import);
                             replaced_count++;
                         }
                     }

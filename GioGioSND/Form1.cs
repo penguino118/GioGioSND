@@ -757,6 +757,7 @@ namespace GioGioSND
                         if (test_filename == Path.GetFileName(file_import))
                         {
                             VAGImportFromWav(i, vag, file_import);
+                            UpdateVAGLengthOnSequences(i);
                             replaced_count++;
                         }
                     }

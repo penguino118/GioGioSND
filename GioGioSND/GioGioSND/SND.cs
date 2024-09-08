@@ -21,7 +21,7 @@ namespace GioGioSND.GioGioSND
         public class SoundSequence {
             
             [TypeConverter(typeof(ExpandableObjectConverter))]
-            public struct SampleEntry
+            public class SampleEntry
             {
                 public byte _sample_index; //based on SmplSCEI
                 public byte _volume;
@@ -40,20 +40,20 @@ namespace GioGioSND.GioGioSND
                 }
                 public override string ToString()
                 {
-                    return String.Format("Sample Index={0}, Volume={1}", this.sample_index, this.volume);
+                    return String.Format("Sample Index={0}, Volume={1}", this.sample_index ^ 0x80, this.volume ^ 0x80);
                 }
             };
             
 
             public short list_flag_unknown;
-            public SampleEntry sample_1;
-            public SampleEntry sample_2;
-            public SampleEntry sample_3;
-            public SampleEntry sample_4;
+            public required SampleEntry sample_1;
+            public required SampleEntry sample_2;
+            public required SampleEntry sample_3;
+            public required SampleEntry sample_4;
             public byte master_volume;
             public byte playback_length;
             public byte length_multiplier;
-            public SampleEntry end_sample; 
+            public required SampleEntry end_sample; 
             public byte[] unknown = new byte[7];
 
 

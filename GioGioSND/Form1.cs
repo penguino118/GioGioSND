@@ -616,7 +616,36 @@ namespace GioGioSND
             vag_list.RemoveAt(selected_clip_index);
             vag_list.Insert(selected_clip_index, imported_vag);
 
+            UpdateVAGLengthOnSequences(selected_clip_index);
             SetVAGListView();
+        }
+
+        private void UpdateVAGLengthOnSequences(int vag_index)
+        {
+            List<int> vag_samplelist_entries = new List<int>();
+            foreach (SampleProperties properties in sample_list) // get all samples that use the vag
+            {
+                if (properties.sample_index == vag_index)
+                {
+                    vag_samplelist_entries.Add(properties.entry_index);
+                }
+            }
+
+            foreach (SoundSequence sequence in sequence_list)
+            {
+                foreach (int sample_index in vag_samplelist_entries)
+                {
+                    // oh well
+                    if (sequence.sample_1.sample_index == sample_index |
+                        sequence.sample_2.sample_index == sample_index |
+                        sequence.sample_3.sample_index == sample_index |
+                        sequence.sample_4.sample_index == sample_index |
+                        sequence.end_sample.sample_index == sample_index)
+                    {
+
+                    }
+                }
+            }
         }
 
         private void ContextVAGPlay_Click(object sender, EventArgs e)

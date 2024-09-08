@@ -50,22 +50,24 @@ namespace GioGioSND.GioGioSND
             public SampleEntry sample_2;
             public SampleEntry sample_3;
             public SampleEntry sample_4;
+            public byte master_volume;
             public byte playback_length;
             public byte length_multiplier;
-            public SampleEntry end_sample; // only played after the sequence ends / after specified length 
-            public byte[] unknown = new byte[8];
+            public SampleEntry end_sample; 
+            public byte[] unknown = new byte[7];
 
 
             [DisplayName("List Flag")]
-            public short display_list_flag_unknown {
+            public short display_list_flag_unknown
+            {
                 get { return list_flag_unknown; } 
                 set { list_flag_unknown = value;  }
             }
             [DisplayName("Sample Entry 1")]
             public SampleEntry display_sample_1
             {
-                get { return sample_2; }
-                set { sample_2 = value; }
+                get { return sample_1; }
+                set { sample_1 = value; }
             }
             [DisplayName("Sample Entry 2")]
             public SampleEntry display_sample_2
@@ -85,6 +87,14 @@ namespace GioGioSND.GioGioSND
                 get { return sample_4; }
                 set { sample_4 = value; }
             }
+            
+            [DisplayName("Master Volume")]
+            public byte display_master_volume
+            {
+                get { return master_volume; }
+                set { master_volume = value; }
+            }
+
             [DisplayName("Playback Length")]
             public byte display_playback_length
             {
@@ -200,13 +210,14 @@ namespace GioGioSND.GioGioSND
                 sequence_data[sequence_offset + 0x05] = modded_sequence.sample_3.volume;
                 sequence_data[sequence_offset + 0x06] = modded_sequence.sample_4.sample_index;
                 sequence_data[sequence_offset + 0x07] = modded_sequence.sample_4.volume;
-                sequence_data[sequence_offset + 0x08] = modded_sequence.playback_length;
-                sequence_data[sequence_offset + 0x09] = modded_sequence.length_multiplier;
-                sequence_data[sequence_offset + 0x0A] = modded_sequence.end_sample.sample_index;
-                sequence_data[sequence_offset + 0x0B] = modded_sequence.end_sample.volume;
-                for (int i = 0; i < 8; i++)
+                sequence_data[sequence_offset + 0x08] = modded_sequence.master_volume;
+                sequence_data[sequence_offset + 0x09] = modded_sequence.playback_length;
+                sequence_data[sequence_offset + 0x0A] = modded_sequence.length_multiplier;
+                sequence_data[sequence_offset + 0x0B] = modded_sequence.end_sample.sample_index;
+                sequence_data[sequence_offset + 0x0C] = modded_sequence.end_sample.volume;
+                for (int i = 0; i < 7; i++)
                 {
-                    sequence_data[(sequence_offset + 0x0C) + i] = modded_sequence.unknown[i];
+                    sequence_data[(sequence_offset + 0x0D) + i] = modded_sequence.unknown[i];
                 }
                 offset += 0x4;
             }
@@ -262,6 +273,7 @@ namespace GioGioSND.GioGioSND
                             volume = reader.ReadByte()
                         };
 
+                        byte master_volume = reader.ReadByte();
                         byte playback_length = reader.ReadByte();
                         byte length_multiplier = reader.ReadByte();
 
@@ -271,9 +283,9 @@ namespace GioGioSND.GioGioSND
                             volume = reader.ReadByte()
                         };
 
-                        byte[] unknown = new byte[8];
+                        byte[] unknown = new byte[7];
 
-                        for (int ii = 0; ii<8; ii++)
+                        for (int ii = 0; ii<7; ii++)
                         {
                             byte val = reader.ReadByte();
                             unknown[ii] = val;
@@ -285,10 +297,11 @@ namespace GioGioSND.GioGioSND
                             sample_1 = sample_1,
                             sample_2 = sample_2,
                             sample_3 = sample_3,
-                            sample_4    = sample_4,
+                            sample_4 = sample_4,
+                            master_volume = master_volume,
                             playback_length = playback_length,
                             length_multiplier = length_multiplier,
-                            end_sample  = end_sample,
+                            end_sample = end_sample,
                             unknown = unknown
                         });
 

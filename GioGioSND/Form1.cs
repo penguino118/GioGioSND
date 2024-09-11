@@ -660,7 +660,8 @@ namespace GioGioSND
                 while (test_length < input_milliseconds)
                 {
                     test_length += base_split_milliseconds;
-                    base_length++;
+                    base_length = (byte)Math.Clamp(1+base_length, 1, 127);
+                    if (base_length == 127) break;
                 }
             }
             else
@@ -668,7 +669,8 @@ namespace GioGioSND
                 base_length = 127;
                 while (base_max_milliseconds + (additive_milliseconds * length_multiplier) < input_milliseconds)
                 {
-                    length_multiplier++;
+                    length_multiplier = (byte)Math.Clamp(1+length_multiplier, 1, 127);
+                    if (length_multiplier == 127) break;
                 }
             }
         }

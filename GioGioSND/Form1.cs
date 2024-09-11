@@ -126,6 +126,7 @@ namespace GioGioSND
                 MessageBox.Show("The ouput path for the file is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
             using (var stream = File.Open(input_file, FileMode.OpenOrCreate))
             {
                 List<byte> output_data = new List<byte>();
@@ -147,6 +148,7 @@ namespace GioGioSND
         {
             sfd.Title = "Select SND File";
             sfd.Filter = ".SND Files|*.SND";
+            sfd.FileName = input_file;
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 output_file = sfd.FileName;

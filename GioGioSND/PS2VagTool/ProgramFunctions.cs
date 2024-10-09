@@ -120,6 +120,9 @@ namespace PS2VagTool
                 frequency = reader.WaveFormat.SampleRate;
                 channels = reader.WaveFormat.Channels;
 
+                if (channels > 1) MessageBox.Show("Input WAV has " + channels + " channels.\n" +
+                        "Input audio must be mono for correct conversion!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 //Get Loop Data
                 loopData = WavFunctions.ReadSampleChunck(reader);
 

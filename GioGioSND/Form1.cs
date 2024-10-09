@@ -53,6 +53,12 @@ namespace GioGioSND
         string ADX_batch_input = "";
         string ADX_batch_output = "";
 
+        private void UpdateTitlebar()
+        {
+            this.Text = "Moody Blues";
+            if (input_file == "") return;
+            this.Text += " - [" + input_file + "]";
+        }
 
         private void StripFileOpen_Click(object sender, EventArgs e)
         {
@@ -62,6 +68,7 @@ namespace GioGioSND
             {
                 input_file = ofd.FileName;
                 LoadSND(File.ReadAllBytes(input_file), false);
+                UpdateTitlebar();
             }
         }
         private void StripFileAFSOpen_Click(object sender, EventArgs e)
@@ -175,6 +182,7 @@ namespace GioGioSND
                 {
                     StripFileSave.Enabled = true;
                 }
+                UpdateTitlebar();
             }
         }
 
@@ -202,6 +210,7 @@ namespace GioGioSND
                     return;
                 }
                 OpenWAVADX(File.ReadAllBytes(input_file), input_extension);
+                UpdateTitlebar();
             }
         }
 
@@ -275,6 +284,7 @@ namespace GioGioSND
                 {
                     MessageBox.Show("Error loading from AFS.\n" + "AFS file is null!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                UpdateTitlebar();
             }
             catch (Exception ex)
             {

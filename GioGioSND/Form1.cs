@@ -71,6 +71,8 @@ namespace GioGioSND
 
         private void StripFileOpen_Click(object sender, EventArgs e)
         {
+            if (FormatTabControl.SelectedTab != SNDTab) return; // to not execute the shortcut outside of the snd tab
+
             ofd.Title = "Select SND File";
             ofd.Filter = "SND Files|*.snd";
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -152,6 +154,8 @@ namespace GioGioSND
 
         private void StripFileSave_Click(object sender, EventArgs e)
         {
+            if (FormatTabControl.SelectedTab != SNDTab) return; // to not execute the shortcut outside of the snd tab
+
             if (input_file is null)
             {
                 MessageBox.Show("The ouput path for the file is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -178,6 +182,8 @@ namespace GioGioSND
 
         private void StripFileSaveAs_Click(object sender, EventArgs e)
         {
+            if (FormatTabControl.SelectedTab != SNDTab) return; // to not execute the shortcut outside of the snd tab
+
             sfd.Title = "Select SND File";
             sfd.Filter = ".SND Files|*.SND";
             sfd.FileName = input_file;

@@ -20,6 +20,8 @@ namespace GioGioSND
             ADXBatchActionPicker.SelectedIndex = 0;
         }
 
+        bool file_modified = false;
+
         string afs_path = "";
         string input_file = "";
         string output_file = "";
@@ -60,12 +62,27 @@ namespace GioGioSND
             this.Text += " - [" + input_file + "]";
         }
 
+        private DialogResult GetSaveConfirmation()
+        {
+            DialogResult result = MessageBox.Show(input_file + " was modified.\nSave changes?", "Warning",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            return result;
+        }
+
         private void StripFileOpen_Click(object sender, EventArgs e)
         {
             ofd.Title = "Select SND File";
             ofd.Filter = "SND Files|*.snd";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                if (file_modified)
+                {
+                    DialogResult save_confirmation = GetSaveConfirmation();
+                    if (save_confirmation == DialogResult.Cancel) return;
+                    else if (save_confirmation == DialogResult.Yes) StripFileSaveAs_Click(sender, e);
+                    file_modified = false;
+                }
+
                 input_file = ofd.FileName;
                 LoadSND(File.ReadAllBytes(input_file), false);
                 UpdateTitlebar();
@@ -78,6 +95,13 @@ namespace GioGioSND
             ofd.Filter = "AFS Files|*.afs";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                if (file_modified)
+                {
+                    DialogResult save_confirmation = GetSaveConfirmation();
+                    if (save_confirmation == DialogResult.Cancel) return;
+                    else if (save_confirmation == DialogResult.Yes) StripFileSaveAs_Click(sender, e);
+                    file_modified = false;
+                }
 
                 string input_afs = ofd.FileName;
                 afs_path = input_afs;
@@ -133,7 +157,7 @@ namespace GioGioSND
                 MessageBox.Show("The ouput path for the file is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             using (var stream = File.Open(input_file, FileMode.OpenOrCreate))
             {
                 List<byte> output_data = new List<byte>();
@@ -149,6 +173,7 @@ namespace GioGioSND
                     SND.WriteOutputData(file_list, vag_list, sample_list, sequence_list, stream);
                 }
             }
+            file_modified = false;
         }
 
         private void StripFileSaveAs_Click(object sender, EventArgs e)
@@ -184,6 +209,7 @@ namespace GioGioSND
                 }
                 UpdateTitlebar();
             }
+            file_modified = false;
         }
 
         private void ADXOpenButton_Click(object sender, EventArgs e)
@@ -603,7 +629,7 @@ namespace GioGioSND
                 string input_wav = ofd.FileName;
                 VAGImportFromWav(selected_clip_index, vag, input_wav);
             }
-
+            file_modified = true;
         }
 
         private void VAGExportToWav(VagEntry vag, string wav_path)
@@ -672,7 +698,7 @@ namespace GioGioSND
                 while (test_length < input_milliseconds)
                 {
                     test_length += base_split_milliseconds;
-                    base_length = (byte)Math.Clamp(1+base_length, 1, 127);
+                    base_length = (byte)Math.Clamp(1 + base_length, 1, 127);
                     if (base_length == 127) break;
                 }
             }
@@ -681,7 +707,7 @@ namespace GioGioSND
                 base_length = 127;
                 while (base_max_milliseconds + (additive_milliseconds * length_multiplier) < input_milliseconds)
                 {
-                    length_multiplier = (byte)Math.Clamp(1+length_multiplier, 1, 127);
+                    length_multiplier = (byte)Math.Clamp(1 + length_multiplier, 1, 127);
                     if (length_multiplier == 127) break;
                 }
             }
@@ -905,7 +931,7 @@ namespace GioGioSND
 
         private void StripExtractHD_Click(object sender, EventArgs e)
         {
-            
+
             if (file_list == null)
             {
                 MessageBox.Show("The file list is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1013,6 +1039,30 @@ namespace GioGioSND
                 }
 
                 File.WriteAllBytes(exported_file, file_list[3]);
+            }
+        }
+
+        private void SequencePropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            file_modified = true;
+        }
+
+        private void SampleDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            file_modified = true;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (file_modified)
+            {
+                DialogResult save_confirmation = GetSaveConfirmation();
+                if (save_confirmation == DialogResult.Cancel) {
+                    e.Cancel = true;
+                    return;
+                }
+                else if (save_confirmation == DialogResult.Yes) StripFileSaveAs_Click(sender, e);
+                file_modified = false;
             }
         }
     }

@@ -349,7 +349,7 @@ namespace GioGioSND
                     var audioFile = new WaveFileReader(stream);
                     int sample_rate = audioFile.WaveFormat.SampleRate;
                     sample_count = audioFile.SampleCount * audioFile.WaveFormat.Channels;
-                    if (sample_rate != 12000 | sample_rate != 24000 | sample_rate != 48000)
+                    if (sample_rate != 12000 && sample_rate != 24000 && sample_rate != 48000)
                     {
                         MessageBox.Show("Your input file's sample rate (" + sample_rate + ") is incompatible with GioGio's Bizarre Adventure. " +
                             "The game only supports ADX playback at 12000hz, 24000hz or 48000hz.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

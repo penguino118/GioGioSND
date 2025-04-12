@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             menuStrip1 = new MenuStrip();
             StripFile = new ToolStripMenuItem();
             StripFileOpen = new ToolStripMenuItem();
@@ -87,7 +87,6 @@
             groupBox1 = new GroupBox();
             ADXOpenButton = new Button();
             ADXPlayButton = new Button();
-            ADXPauseButton = new Button();
             ADXStopButton = new Button();
             groupBox3 = new GroupBox();
             groupBox2 = new GroupBox();
@@ -166,39 +165,39 @@
             // StripFile
             // 
             StripFile.DropDownItems.AddRange(new ToolStripItem[] { StripFileOpen, StripFileAFSOpen, toolStripSeparator5, StripFileSave, StripFileSaveAs });
-            StripFile.Image = GioGioSND.Properties.Resources.StripFile;
+            StripFile.Image = (Image)resources.GetObject("StripFile.Image");
             StripFile.Name = "StripFile";
             StripFile.Size = new Size(53, 20);
             StripFile.Text = "File";
             // 
             // StripFileOpen
             // 
-            StripFileOpen.Image = GioGioSND.Properties.Resources.StripFileOpen;
+            StripFileOpen.Image = (Image)resources.GetObject("StripFileOpen.Image");
             StripFileOpen.Name = "StripFileOpen";
             StripFileOpen.ShortcutKeys = Keys.Control | Keys.O;
-            StripFileOpen.Size = new Size(180, 22);
+            StripFileOpen.Size = new Size(175, 22);
             StripFileOpen.Text = "Open";
             StripFileOpen.Click += StripFileOpen_Click;
             // 
             // StripFileAFSOpen
             // 
             StripFileAFSOpen.Name = "StripFileAFSOpen";
-            StripFileAFSOpen.Size = new Size(180, 22);
+            StripFileAFSOpen.Size = new Size(175, 22);
             StripFileAFSOpen.Text = "Open From AFS";
             StripFileAFSOpen.Click += StripFileAFSOpen_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(177, 6);
+            toolStripSeparator5.Size = new Size(172, 6);
             // 
             // StripFileSave
             // 
             StripFileSave.Enabled = false;
-            StripFileSave.Image = GioGioSND.Properties.Resources.StripFileSave;
+            StripFileSave.Image = (Image)resources.GetObject("StripFileSave.Image");
             StripFileSave.Name = "StripFileSave";
             StripFileSave.ShortcutKeys = Keys.Control | Keys.S;
-            StripFileSave.Size = new Size(180, 22);
+            StripFileSave.Size = new Size(175, 22);
             StripFileSave.Text = "Save";
             StripFileSave.Click += StripFileSave_Click;
             // 
@@ -207,7 +206,7 @@
             StripFileSaveAs.Enabled = false;
             StripFileSaveAs.Name = "StripFileSaveAs";
             StripFileSaveAs.ShortcutKeys = Keys.Control | Keys.Alt | Keys.S;
-            StripFileSaveAs.Size = new Size(180, 22);
+            StripFileSaveAs.Size = new Size(175, 22);
             StripFileSaveAs.Text = "Save as";
             StripFileSaveAs.Click += StripFileSaveAs_Click;
             // 
@@ -215,7 +214,7 @@
             // 
             StripExtract.DropDownItems.AddRange(new ToolStripItem[] { StripExtractInner, StripExtractSound });
             StripExtract.Enabled = false;
-            StripExtract.Image = GioGioSND.Properties.Resources.StripExtract;
+            StripExtract.Image = (Image)resources.GetObject("StripExtract.Image");
             StripExtract.Name = "StripExtract";
             StripExtract.Size = new Size(71, 20);
             StripExtract.Text = "Extract";
@@ -259,13 +258,13 @@
             // 
             StripExtractSound.DropDownItems.AddRange(new ToolStripItem[] { asWAVToolStripMenuItem, batchExportVAGToolStripMenuItem });
             StripExtractSound.Name = "StripExtractSound";
-            StripExtractSound.Size = new Size(180, 22);
+            StripExtractSound.Size = new Size(137, 22);
             StripExtractSound.Text = "Sound Clips";
             // 
             // asWAVToolStripMenuItem
             // 
             asWAVToolStripMenuItem.Name = "asWAVToolStripMenuItem";
-            asWAVToolStripMenuItem.Size = new Size(180, 22);
+            asWAVToolStripMenuItem.Size = new Size(177, 22);
             asWAVToolStripMenuItem.Text = "Batch Export (WAV)";
             asWAVToolStripMenuItem.Click += ContextVAGBatchExportWAV_Click;
             // 
@@ -284,7 +283,7 @@
             VAGListView.GridLines = true;
             VAGListView.Location = new Point(0, 0);
             VAGListView.Name = "VAGListView";
-            VAGListView.Size = new Size(356, 226);
+            VAGListView.Size = new Size(356, 220);
             VAGListView.TabIndex = 3;
             VAGListView.UseCompatibleStateImageBehavior = false;
             VAGListView.View = View.Details;
@@ -318,9 +317,9 @@
             // 
             // ContextVAGPlay
             // 
-            ContextVAGPlay.Image = GioGioSND.Properties.Resources.PlaybackPlay;
+            ContextVAGPlay.Image = (Image)resources.GetObject("ContextVAGPlay.Image");
             ContextVAGPlay.Name = "ContextVAGPlay";
-            ContextVAGPlay.Size = new Size(180, 22);
+            ContextVAGPlay.Size = new Size(138, 22);
             ContextVAGPlay.Text = "Play";
             ContextVAGPlay.Click += ContextVAGPlay_Click;
             // 
@@ -331,7 +330,7 @@
             // 
             // ContextVAGExportWAV
             // 
-            ContextVAGExportWAV.Image = GioGioSND.Properties.Resources.StripFileSave;
+            ContextVAGExportWAV.Image = (Image)resources.GetObject("ContextVAGExportWAV.Image");
             ContextVAGExportWAV.Name = "ContextVAGExportWAV";
             ContextVAGExportWAV.Size = new Size(138, 22);
             ContextVAGExportWAV.Text = "Export WAV";
@@ -339,7 +338,7 @@
             // 
             // ContextVAGImportWAV
             // 
-            ContextVAGImportWAV.Image = GioGioSND.Properties.Resources.FileImport;
+            ContextVAGImportWAV.Image = (Image)resources.GetObject("ContextVAGImportWAV.Image");
             ContextVAGImportWAV.Name = "ContextVAGImportWAV";
             ContextVAGImportWAV.Size = new Size(138, 22);
             ContextVAGImportWAV.Text = "Import WAV";
@@ -365,24 +364,24 @@
             // ContextVAGBatch
             // 
             ContextVAGBatch.DropDownItems.AddRange(new ToolStripItem[] { ContextVAGBatchExportWAV, ContextVAGBatchImportWAV, toolStripSeparator4, VAGContextBatchExportVAG });
-            ContextVAGBatch.Image = GioGioSND.Properties.Resources.RootICO;
+            ContextVAGBatch.Image = (Image)resources.GetObject("ContextVAGBatch.Image");
             ContextVAGBatch.Name = "ContextVAGBatch";
-            ContextVAGBatch.Size = new Size(180, 22);
+            ContextVAGBatch.Size = new Size(138, 22);
             ContextVAGBatch.Text = "Batch";
             // 
             // ContextVAGBatchExportWAV
             // 
-            ContextVAGBatchExportWAV.Image = GioGioSND.Properties.Resources.StripBatchExport;
+            ContextVAGBatchExportWAV.Image = (Image)resources.GetObject("ContextVAGBatchExportWAV.Image");
             ContextVAGBatchExportWAV.Name = "ContextVAGBatchExportWAV";
-            ContextVAGBatchExportWAV.Size = new Size(180, 22);
+            ContextVAGBatchExportWAV.Size = new Size(179, 22);
             ContextVAGBatchExportWAV.Text = "Batch Export (WAV)";
             ContextVAGBatchExportWAV.Click += ContextVAGBatchExportWAV_Click;
             // 
             // ContextVAGBatchImportWAV
             // 
-            ContextVAGBatchImportWAV.Image = GioGioSND.Properties.Resources.StripBatchImport;
+            ContextVAGBatchImportWAV.Image = (Image)resources.GetObject("ContextVAGBatchImportWAV.Image");
             ContextVAGBatchImportWAV.Name = "ContextVAGBatchImportWAV";
-            ContextVAGBatchImportWAV.Size = new Size(180, 22);
+            ContextVAGBatchImportWAV.Size = new Size(179, 22);
             ContextVAGBatchImportWAV.Text = "Batch Import (WAV)";
             ContextVAGBatchImportWAV.Click += ContextVAGBatchImportWAV_Click;
             // 
@@ -394,16 +393,17 @@
             // VAGContextBatchExportVAG
             // 
             VAGContextBatchExportVAG.Name = "VAGContextBatchExportVAG";
-            VAGContextBatchExportVAG.Size = new Size(180, 22);
+            VAGContextBatchExportVAG.Size = new Size(179, 22);
             VAGContextBatchExportVAG.Text = "Batch Export (VAG)";
             VAGContextBatchExportVAG.Click += VAGContextBatchExportVAG_Click;
             // 
             // VAGPlayButton
             // 
             VAGPlayButton.Image = (Image)resources.GetObject("VAGPlayButton.Image");
+            VAGPlayButton.ImageAlign = ContentAlignment.MiddleRight;
             VAGPlayButton.Location = new Point(3, 3);
             VAGPlayButton.Name = "VAGPlayButton";
-            VAGPlayButton.Size = new Size(60, 23);
+            VAGPlayButton.Size = new Size(70, 27);
             VAGPlayButton.TabIndex = 4;
             VAGPlayButton.Text = "Play";
             VAGPlayButton.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -413,9 +413,10 @@
             // VAGStopButton
             // 
             VAGStopButton.Image = (Image)resources.GetObject("VAGStopButton.Image");
-            VAGStopButton.Location = new Point(140, 3);
+            VAGStopButton.ImageAlign = ContentAlignment.MiddleRight;
+            VAGStopButton.Location = new Point(160, 3);
             VAGStopButton.Name = "VAGStopButton";
-            VAGStopButton.Size = new Size(61, 23);
+            VAGStopButton.Size = new Size(70, 27);
             VAGStopButton.TabIndex = 5;
             VAGStopButton.Text = "Stop";
             VAGStopButton.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -425,11 +426,12 @@
             // VAGPause
             // 
             VAGPause.Image = (Image)resources.GetObject("VAGPause.Image");
-            VAGPause.Location = new Point(69, 3);
+            VAGPause.Location = new Point(79, 3);
             VAGPause.Name = "VAGPause";
-            VAGPause.Size = new Size(65, 23);
+            VAGPause.Size = new Size(75, 27);
             VAGPause.TabIndex = 6;
             VAGPause.Text = "Pause";
+            VAGPause.TextAlign = ContentAlignment.MiddleRight;
             VAGPause.TextImageRelation = TextImageRelation.ImageBeforeText;
             VAGPause.UseVisualStyleBackColor = true;
             VAGPause.Click += VAGPause_Click;
@@ -477,7 +479,7 @@
             // 
             VAGListSplitContainer.Panel2.Controls.Add(VAGListView);
             VAGListSplitContainer.Size = new Size(356, 258);
-            VAGListSplitContainer.SplitterDistance = 28;
+            VAGListSplitContainer.SplitterDistance = 34;
             VAGListSplitContainer.TabIndex = 7;
             // 
             // tabPage2
@@ -486,7 +488,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(362, 261);
+            tabPage2.Size = new Size(362, 264);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Sample List";
             tabPage2.UseVisualStyleBackColor = true;
@@ -495,19 +497,19 @@
             // 
             SampleDataGrid.AllowUserToAddRows = false;
             SampleDataGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Control;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            SampleDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            SampleDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             SampleDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SampleDataGrid.Dock = DockStyle.Fill;
             SampleDataGrid.Location = new Point(3, 3);
             SampleDataGrid.Name = "SampleDataGrid";
-            SampleDataGrid.Size = new Size(356, 255);
+            SampleDataGrid.Size = new Size(356, 258);
             SampleDataGrid.TabIndex = 0;
             SampleDataGrid.CellEndEdit += SampleDataGrid_CellEndEdit;
             SampleDataGrid.RowPostPaint += SampleDataGrid_RowPostPaint;
@@ -517,7 +519,7 @@
             tabPage3.Controls.Add(splitContainer1);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(362, 261);
+            tabPage3.Size = new Size(362, 264);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Sequence Data";
             tabPage3.UseVisualStyleBackColor = true;
@@ -536,8 +538,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(SequencePropertyGrid);
-            splitContainer1.Size = new Size(362, 261);
-            splitContainer1.SplitterDistance = 110;
+            splitContainer1.Size = new Size(362, 264);
+            splitContainer1.SplitterDistance = 111;
             splitContainer1.TabIndex = 1;
             // 
             // SequenceTreeView
@@ -545,7 +547,7 @@
             SequenceTreeView.Dock = DockStyle.Fill;
             SequenceTreeView.Location = new Point(0, 0);
             SequenceTreeView.Name = "SequenceTreeView";
-            SequenceTreeView.Size = new Size(362, 110);
+            SequenceTreeView.Size = new Size(362, 111);
             SequenceTreeView.TabIndex = 0;
             SequenceTreeView.AfterSelect += SequenceTreeView_AfterSelect;
             // 
@@ -556,7 +558,7 @@
             SequencePropertyGrid.Location = new Point(0, 0);
             SequencePropertyGrid.Name = "SequencePropertyGrid";
             SequencePropertyGrid.PropertySort = PropertySort.NoSort;
-            SequencePropertyGrid.Size = new Size(362, 147);
+            SequencePropertyGrid.Size = new Size(362, 149);
             SequencePropertyGrid.TabIndex = 0;
             SequencePropertyGrid.PropertyValueChanged += SequencePropertyGrid_PropertyValueChanged;
             // 
@@ -652,19 +654,18 @@
             // 
             splitContainer2.Panel2.Controls.Add(groupBox3);
             splitContainer2.Size = new Size(356, 282);
-            splitContainer2.SplitterDistance = 77;
+            splitContainer2.SplitterDistance = 85;
             splitContainer2.TabIndex = 0;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(ADXOpenButton);
             groupBox1.Controls.Add(ADXPlayButton);
-            groupBox1.Controls.Add(ADXPauseButton);
             groupBox1.Controls.Add(ADXStopButton);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(356, 77);
+            groupBox1.Size = new Size(356, 85);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             groupBox1.Text = "Input Audio";
@@ -672,13 +673,13 @@
             // ADXOpenButton
             // 
             ADXOpenButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ADXOpenButton.Image = GioGioSND.Properties.Resources.ADXWAVOpen;
+            ADXOpenButton.Image = (Image)resources.GetObject("ADXOpenButton.Image");
             ADXOpenButton.ImageAlign = ContentAlignment.MiddleRight;
             ADXOpenButton.Location = new Point(6, 22);
-            ADXOpenButton.MaximumSize = new Size(135, 40);
-            ADXOpenButton.MinimumSize = new Size(128, 38);
+            ADXOpenButton.MaximumSize = new Size(150, 50);
+            ADXOpenButton.MinimumSize = new Size(150, 50);
             ADXOpenButton.Name = "ADXOpenButton";
-            ADXOpenButton.Size = new Size(135, 40);
+            ADXOpenButton.Size = new Size(150, 50);
             ADXOpenButton.TabIndex = 0;
             ADXOpenButton.Text = "Open Input Audio\r\n(WAV / ADX)";
             ADXOpenButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -690,42 +691,27 @@
             // 
             ADXPlayButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             ADXPlayButton.Image = (Image)resources.GetObject("ADXPlayButton.Image");
-            ADXPlayButton.Location = new Point(152, 28);
-            ADXPlayButton.MaximumSize = new Size(60, 27);
-            ADXPlayButton.MinimumSize = new Size(60, 27);
+            ADXPlayButton.ImageAlign = ContentAlignment.MiddleRight;
+            ADXPlayButton.Location = new Point(280, 22);
+            ADXPlayButton.MaximumSize = new Size(70, 25);
             ADXPlayButton.Name = "ADXPlayButton";
-            ADXPlayButton.Size = new Size(60, 27);
+            ADXPlayButton.Size = new Size(70, 25);
             ADXPlayButton.TabIndex = 7;
             ADXPlayButton.Text = "Play";
             ADXPlayButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             ADXPlayButton.UseVisualStyleBackColor = true;
             ADXPlayButton.Click += ADXPlayButton_Click;
             // 
-            // ADXPauseButton
-            // 
-            ADXPauseButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            ADXPauseButton.Image = (Image)resources.GetObject("ADXPauseButton.Image");
-            ADXPauseButton.Location = new Point(218, 28);
-            ADXPauseButton.MaximumSize = new Size(65, 27);
-            ADXPauseButton.MinimumSize = new Size(65, 27);
-            ADXPauseButton.Name = "ADXPauseButton";
-            ADXPauseButton.Size = new Size(65, 27);
-            ADXPauseButton.TabIndex = 9;
-            ADXPauseButton.Text = "Pause";
-            ADXPauseButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            ADXPauseButton.UseVisualStyleBackColor = true;
-            ADXPauseButton.Click += ADXPauseButton_Click;
-            // 
             // ADXStopButton
             // 
             ADXStopButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             ADXStopButton.Image = (Image)resources.GetObject("ADXStopButton.Image");
-            ADXStopButton.Location = new Point(289, 28);
-            ADXStopButton.MaximumSize = new Size(61, 27);
-            ADXStopButton.MinimumSize = new Size(61, 27);
+            ADXStopButton.ImageAlign = ContentAlignment.MiddleRight;
+            ADXStopButton.Location = new Point(280, 47);
+            ADXStopButton.MaximumSize = new Size(70, 25);
             ADXStopButton.Name = "ADXStopButton";
-            ADXStopButton.Size = new Size(61, 27);
-            ADXStopButton.TabIndex = 8;
+            ADXStopButton.Size = new Size(70, 25);
+            ADXStopButton.TabIndex = 9;
             ADXStopButton.Text = "Stop";
             ADXStopButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             ADXStopButton.UseVisualStyleBackColor = true;
@@ -738,7 +724,7 @@
             groupBox3.Dock = DockStyle.Fill;
             groupBox3.Location = new Point(0, 0);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(356, 201);
+            groupBox3.Size = new Size(356, 193);
             groupBox3.TabIndex = 15;
             groupBox3.TabStop = false;
             groupBox3.Text = "Output Audio";
@@ -746,6 +732,7 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(ADXLoopCheckbox);
@@ -753,7 +740,7 @@
             groupBox2.Controls.Add(ADXLoopStartInput);
             groupBox2.Location = new Point(6, 22);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(344, 118);
+            groupBox2.Size = new Size(344, 107);
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Loop Settings";
@@ -813,9 +800,9 @@
             // 
             ADXSaveButton.Anchor = AnchorStyles.Bottom;
             ADXSaveButton.Enabled = false;
-            ADXSaveButton.Image = GioGioSND.Properties.Resources.ADXWAVSave;
+            ADXSaveButton.Image = (Image)resources.GetObject("ADXSaveButton.Image");
             ADXSaveButton.ImageAlign = ContentAlignment.MiddleRight;
-            ADXSaveButton.Location = new Point(91, 156);
+            ADXSaveButton.Location = new Point(80, 154);
             ADXSaveButton.MaximumSize = new Size(174, 30);
             ADXSaveButton.MinimumSize = new Size(174, 30);
             ADXSaveButton.Name = "ADXSaveButton";
@@ -841,7 +828,6 @@
             // ADXBatchSplitContainer
             // 
             ADXBatchSplitContainer.Dock = DockStyle.Fill;
-            ADXBatchSplitContainer.FixedPanel = FixedPanel.Panel2;
             ADXBatchSplitContainer.IsSplitterFixed = true;
             ADXBatchSplitContainer.Location = new Point(3, 3);
             ADXBatchSplitContainer.Name = "ADXBatchSplitContainer";
@@ -850,14 +836,14 @@
             // ADXBatchSplitContainer.Panel1
             // 
             ADXBatchSplitContainer.Panel1.Controls.Add(ADXBatchInputSplitContainer);
-            ADXBatchSplitContainer.Panel1MinSize = 246;
+            ADXBatchSplitContainer.Panel1MinSize = 244;
             // 
             // ADXBatchSplitContainer.Panel2
             // 
             ADXBatchSplitContainer.Panel2.Controls.Add(ADXBatchSaveFolder);
             ADXBatchSplitContainer.Panel2.Controls.Add(ADXBatchConvert);
             ADXBatchSplitContainer.Size = new Size(356, 282);
-            ADXBatchSplitContainer.SplitterDistance = 247;
+            ADXBatchSplitContainer.SplitterDistance = 244;
             ADXBatchSplitContainer.TabIndex = 6;
             // 
             // ADXBatchInputSplitContainer
@@ -879,19 +865,21 @@
             // ADXBatchInputSplitContainer.Panel2
             // 
             ADXBatchInputSplitContainer.Panel2.Controls.Add(ADXBatchFileList);
-            ADXBatchInputSplitContainer.Size = new Size(356, 247);
+            ADXBatchInputSplitContainer.Size = new Size(356, 244);
             ADXBatchInputSplitContainer.SplitterDistance = 35;
             ADXBatchInputSplitContainer.TabIndex = 0;
             // 
             // ADXBatchOpenFolder
             // 
-            ADXBatchOpenFolder.Image = GioGioSND.Properties.Resources.RootICO;
+            ADXBatchOpenFolder.Image = (Image)resources.GetObject("ADXBatchOpenFolder.Image");
             ADXBatchOpenFolder.ImageAlign = ContentAlignment.MiddleRight;
-            ADXBatchOpenFolder.Location = new Point(5, 6);
+            ADXBatchOpenFolder.Location = new Point(2, 2);
+            ADXBatchOpenFolder.MaximumSize = new Size(155, 30);
+            ADXBatchOpenFolder.MinimumSize = new Size(0, 30);
             ADXBatchOpenFolder.Name = "ADXBatchOpenFolder";
-            ADXBatchOpenFolder.Size = new Size(127, 23);
+            ADXBatchOpenFolder.Size = new Size(155, 30);
             ADXBatchOpenFolder.TabIndex = 2;
-            ADXBatchOpenFolder.Text = "Open Input Folder";
+            ADXBatchOpenFolder.Text = "Select Input Folder";
             ADXBatchOpenFolder.TextImageRelation = TextImageRelation.ImageBeforeText;
             ADXBatchOpenFolder.UseVisualStyleBackColor = true;
             ADXBatchOpenFolder.Click += ADXBatchOpenFolder_Click;
@@ -901,9 +889,9 @@
             ADXBatchActionPicker.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ADXBatchActionPicker.FormattingEnabled = true;
             ADXBatchActionPicker.Items.AddRange(new object[] { "WAV to ADX", "ADX to WAV" });
-            ADXBatchActionPicker.Location = new Point(232, 6);
+            ADXBatchActionPicker.Location = new Point(249, 6);
             ADXBatchActionPicker.Name = "ADXBatchActionPicker";
-            ADXBatchActionPicker.Size = new Size(121, 23);
+            ADXBatchActionPicker.Size = new Size(103, 23);
             ADXBatchActionPicker.TabIndex = 1;
             ADXBatchActionPicker.SelectedIndexChanged += ADXBatchActionPicker_SelectedIndexChanged;
             // 
@@ -911,18 +899,18 @@
             // 
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label3.AutoSize = true;
-            label3.Location = new Point(151, 10);
+            label3.Location = new Point(204, 10);
             label3.Name = "label3";
-            label3.Size = new Size(78, 15);
+            label3.Size = new Size(45, 15);
             label3.TabIndex = 3;
-            label3.Text = "Batch Action:";
+            label3.Text = "Action:";
             // 
             // ADXBatchFileList
             // 
             ADXBatchFileList.Dock = DockStyle.Fill;
             ADXBatchFileList.Location = new Point(0, 0);
             ADXBatchFileList.Name = "ADXBatchFileList";
-            ADXBatchFileList.Size = new Size(356, 208);
+            ADXBatchFileList.Size = new Size(356, 205);
             ADXBatchFileList.TabIndex = 0;
             ADXBatchFileList.UseCompatibleStateImageBehavior = false;
             ADXBatchFileList.View = View.List;
@@ -930,11 +918,12 @@
             // ADXBatchSaveFolder
             // 
             ADXBatchSaveFolder.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            ADXBatchSaveFolder.Image = GioGioSND.Properties.Resources.StripExtract;
+            ADXBatchSaveFolder.Image = (Image)resources.GetObject("ADXBatchSaveFolder.Image");
             ADXBatchSaveFolder.ImageAlign = ContentAlignment.MiddleRight;
-            ADXBatchSaveFolder.Location = new Point(3, 2);
+            ADXBatchSaveFolder.Location = new Point(2, 2);
+            ADXBatchSaveFolder.MinimumSize = new Size(155, 30);
             ADXBatchSaveFolder.Name = "ADXBatchSaveFolder";
-            ADXBatchSaveFolder.Size = new Size(142, 27);
+            ADXBatchSaveFolder.Size = new Size(155, 30);
             ADXBatchSaveFolder.TabIndex = 5;
             ADXBatchSaveFolder.Text = "Select Output Folder";
             ADXBatchSaveFolder.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -945,10 +934,11 @@
             // 
             ADXBatchConvert.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ADXBatchConvert.Enabled = false;
-            ADXBatchConvert.Image = GioGioSND.Properties.Resources.ADXWAV;
-            ADXBatchConvert.Location = new Point(250, 2);
+            ADXBatchConvert.Image = (Image)resources.GetObject("ADXBatchConvert.Image");
+            ADXBatchConvert.Location = new Point(244, 2);
+            ADXBatchConvert.MinimumSize = new Size(110, 30);
             ADXBatchConvert.Name = "ADXBatchConvert";
-            ADXBatchConvert.Size = new Size(103, 27);
+            ADXBatchConvert.Size = new Size(110, 30);
             ADXBatchConvert.TabIndex = 4;
             ADXBatchConvert.Text = "Convert All";
             ADXBatchConvert.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -1086,7 +1076,6 @@
         private Button ADXOpenButton;
         private Button ADXPlayButton;
         private Button ADXStopButton;
-        private Button ADXPauseButton;
         private CheckBox ADXLoopCheckbox;
         private NumericUpDown ADXLoopEndInput;
         private NumericUpDown ADXLoopStartInput;
